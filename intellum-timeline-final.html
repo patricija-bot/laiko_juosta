@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intellum Evolve Timeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 0;
+            padding-bottom: 200px;
+            min-height: 300px;
+        }
+
+        .timeline-points {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            align-items: flex-start;
+            z-index: 2;
+            padding-top: 0;
+        }
+
+        .timeline-point {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+            position: relative;
+            top: 0;
+            margin-top: 0;
+        }
+
+        .timeline-point.has-active {
+            flex: 0.6;
+        }
+
+        .timeline-point.active {
+            flex: 2.5;
+        }
+
+        .point-button {
+            position: relative;
+            z-index: 10;
+            min-width: 80px;
+            width: 100%;
+            max-width: 200px;
+            height: 36px;
+            min-height: 36px;
+            border-radius: 50px;
+            border: 2px solid black;
+            background: white;
+            color: black;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .point-button:not(.active) {
+            padding: 0;
+        }
+
+        .point-button:hover {
+            background: black;
+            color: white;
+        }
+
+        .point-button.active {
+            background: black;
+            color: white;
+            height: auto;
+            min-height: 150px;
+            border-radius: 20px;
+            padding: 1rem;
+            justify-content: flex-start;
+        }
+
+        .bubble-date {
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        
+        .point-button.active .bubble-date {
+            margin-bottom: 0.5rem;
+            width: auto;
+            height: auto;
+        }
+
+        .point-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin-top: 0;
+        }
+        
+        .point-button.active .point-content {
+            margin-top: 0.5rem;
+        }
+
+        .point-button.active .point-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .content-title {
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+
+        .content-description {
+            color: white;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        @media (max-width: 968px) {
+            .timeline-points {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+                padding-left: 0;
+            }
+
+            .timeline-point {
+                width: 100%;
+                flex: none;
+            }
+
+            .timeline-point.has-active,
+            .timeline-point.active {
+                flex: none;
+            }
+
+            .point-button {
+                min-width: 75px;
+                max-width: 75px;
+            }
+
+            .point-button.active {
+                max-width: 50%;
+                min-height: 140px;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timeline-container">
+            <div class="timeline-points" id="timeline">
+                <!-- Timeline points will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const timelineData = [
+            {
+                id: 1,
+                title: "US Bank Secrecy Act",
+                date: "1970",
+                description: ""
+            },
+            {
+                id: 2,
+                title: "Financial Action Task Force",
+                date: "1989",
+                description: ""
+            },
+            {
+                id: 3,
+                title: "1st EU AML Directive",
+                date: "1991",
+                description: ""
+            },
+            {
+                id: 4,
+                title: "The UN Convention & AML Treaty",
+                date: "2000",
+                description: ""
+            },
+            {
+                id: 5,
+                title: "2nd EU AML Directive",
+                date: "2001",
+                description: ""
+            },
+            {
+                id: 6,
+                title: "3rd EU AML Directive",
+                date: "2005",
+                description: ""
+            },
+            {
+                id: 7,
+                title: "4th EU AML Directive",
+                date: "2015",
+                description: ""
+            },
+            {
+                id: 8,
+                title: "5th EU AML Directive",
+                date: "2018",
+                description: ""
+            },
+            {
+                id: 9,
+                title: "6th EU AML Directive",
+                date: "2020",
+                description: ""
+            },
+            {
+                id: 10,
+                title: "US Anti-Money Laundering Act",
+                date: "2021",
+                description: ""
+            }
+        ];
+
+        let activePoint = null;
+
+        function togglePoint(id) {
+            const wasActive = activePoint === id;
+            
+            // Remove active classes from all points
+            document.querySelectorAll('.timeline-point').forEach(point => {
+                point.classList.remove('active', 'has-active');
+            });
+            document.querySelectorAll('.point-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Activate clicked point if it wasn't already active
+            if (!wasActive) {
+                const pointWrapper = document.getElementById(`point-wrapper-${id}`);
+                pointWrapper.classList.add('active');
+                document.getElementById(`point-${id}`).classList.add('active');
+                
+                // Add has-active class to all other points
+                document.querySelectorAll('.timeline-point').forEach(point => {
+                    if (!point.classList.contains('active')) {
+                        point.classList.add('has-active');
+                    }
+                });
+                
+                activePoint = id;
+            } else {
+                activePoint = null;
+            }
+        }
+
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            
+            timelineData.forEach(point => {
+                const pointDiv = document.createElement('div');
+                pointDiv.className = 'timeline-point';
+                pointDiv.id = `point-wrapper-${point.id}`;
+                
+                const descriptionHTML = point.description 
+                    ? `<p class="content-description">${point.description}</p>` 
+                    : '';
+                
+                pointDiv.innerHTML = `
+                    <button class="point-button" id="point-${point.id}" onclick="togglePoint(${point.id})">
+                        <div class="bubble-date">${point.date}</div>
+                        <div class="point-content">
+                            <h3 class="content-title">${point.title}</h3>
+                            ${descriptionHTML}
+                        </div>
+                    </button>
+                `;
+                
+                timeline.appendChild(pointDiv);
+            });
+        }
+
+        // Initialize timeline on page load
+        renderTimeline();
+    </script>
+</body>
+</html>
