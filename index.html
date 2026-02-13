@@ -15,11 +15,11 @@
         body {
             font-family: 'Space Mono', monospace;
             background: white;
-            height: 400px;
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 0.75rem;
             overflow: hidden;
         }
 
@@ -44,7 +44,7 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            gap: 0.2rem;
+            gap: 0.15rem;
             align-items: center;
             z-index: 2;
             width: 100%;
@@ -61,17 +61,17 @@
         }
 
         .timeline-point.has-active {
-            flex: 0.5;
+            flex: 0.75;
         }
 
         .timeline-point.active {
-            flex: 2.5;
+            flex: 2.2;
         }
 
         .point-button {
             position: relative;
             z-index: 10;
-            min-width: 70px;
+            min-width: 80px;
             width: 100%;
             max-width: 180px;
             height: 32px;
@@ -102,13 +102,13 @@
             background: black;
             color: white;
             height: auto;
-            min-height: 180px;
+            min-height: 150px;
             border-radius: 16px;
-            padding: 0.9rem;
+            padding: 0.8rem;
             justify-content: center;
             transform: translateY(0);
-            margin-top: -74px;
-            margin-bottom: -74px;
+            margin-top: -59px;
+            margin-bottom: -59px;
         }
 
         .bubble-date {
@@ -123,7 +123,7 @@
         }
         
         .point-button.active .bubble-date {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
             width: auto;
             height: auto;
         }
@@ -137,38 +137,38 @@
         }
         
         .point-button.active .point-content {
-            margin-top: 0.3rem;
+            margin-top: 0.25rem;
         }
 
         .point-button.active .point-content {
-            max-height: 150px;
+            max-height: 130px;
             opacity: 1;
         }
 
         .content-title {
             color: white;
             font-weight: 700;
-            font-size: 0.8rem;
-            margin-bottom: 0.3rem;
+            font-size: 0.78rem;
+            margin-bottom: 0.25rem;
             text-align: center;
             line-height: 1.2;
         }
 
         .content-description {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             line-height: 1.3;
             text-align: center;
         }
 
         @media (max-width: 968px) {
             body {
-                padding: 0.75rem;
+                padding: 0.5rem;
             }
 
             .timeline-points {
                 flex-direction: column;
-                gap: 1.2rem;
+                gap: 2rem;
                 align-items: flex-start;
             }
 
@@ -183,15 +183,15 @@
             }
 
             .point-button {
-                min-width: 65px;
-                max-width: 65px;
+                min-width: 70px;
+                max-width: 70px;
             }
 
             .point-button.active {
                 max-width: 50%;
-                min-height: 140px;
-                margin-top: -54px;
-                margin-bottom: -54px;
+                min-height: 130px;
+                margin-top: -49px;
+                margin-bottom: -49px;
             }
         }
     </style>
