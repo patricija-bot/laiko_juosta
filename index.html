@@ -117,18 +117,6 @@
             margin-bottom: -59px;
         }
 
-        /* Visited state: subtle green border to show it's been seen */
-        .point-button.visited:not(.active) {
-            border-color: #22c55e;
-            color: #15803d;
-        }
-
-        .point-button.visited:not(.active):hover {
-            background: #15803d;
-            color: white;
-            border-color: #15803d;
-        }
-
         .bubble-date {
             transition: all 0.3s ease;
             display: flex;
@@ -239,10 +227,11 @@
 
         let activePoint = null;
         const visitedPoints = new Set();
+        let hasCompleted = false;
 
         function checkCompletion() {
-            if (visitedPoints.size === timelineData.length) {
-                // All points have been visited — notify Evolve
+            if (!hasCompleted && visitedPoints.size === timelineData.length) {
+                hasCompleted = true;
                 evolve?.postMessage('completed');
             }
         }
@@ -250,11 +239,8 @@
         function togglePoint(id) {
             const wasActive = activePoint === id;
 
-            // Mark as visited
             visitedPoints.add(id);
-            document.getElementById(`point-${id}`).classList.add('visited');
 
-            // Remove active classes from all points
             document.querySelectorAll('.timeline-point').forEach(point => {
                 point.classList.remove('active', 'has-active');
             });
@@ -277,12 +263,6 @@
             } else {
                 activePoint = null;
             }
-
-            // Re-apply visited styling (active class may override it, that's fine)
-            visitedPoints.forEach(vid => {
-                const btn = document.getElementById(`point-${vid}`);
-                if (btn) btn.classList.add('visited');
-            });
 
             checkCompletion();
         }
